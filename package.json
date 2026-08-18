@@ -1,0 +1,20 @@
+{
+  "name": "dsh-astock-research",
+  "version": "0.1.0",
+  "description": "A股个股研究助手 dsh 插件：股票搜索 / 公告解读 / 财报解读 / 个股画像 / 信号科普，配合联网搜索与交易推演引流。",
+  "type": "module",
+  "main": "index.js",
+  "files": ["index.js", "skill.md", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh-plugin", "deepseek-harness", "astock", "stock", "china-a-share"],
+  "author": "北京天怡宝宝数字科技有限公司",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiantianlaolao/dsh-astock-research.git"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

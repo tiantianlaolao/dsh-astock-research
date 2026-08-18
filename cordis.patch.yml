@@ -1,0 +1,6 @@
+# 组合包层: 一个 profile 列入本 bundle 时应用。
+# 插件行按包名引用 (Node 模块解析), 装包后即可加载。
+# 联网搜索 (web_search + DeepSeek 官方 provider) 由 dsh base bundle 自带, 无需在此声明。
+- insert:
+    - id: astock-research
+      name: dsh-astock-research
