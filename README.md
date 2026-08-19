@@ -22,12 +22,14 @@ A股个股研究助手 —— [DeepSeek Harness (dsh)](https://github.com/deepse
 前提：Node.js `^22.19` 或 `>=24`，一个 DeepSeek API key（首次在 dsh Web UI「设置 → 模型」里填）。
 
 ```sh
-npm install -g pnpm                                                   # 一次性，dsh 装插件需要
-npx @deepseek-ai/dsh plugin --profile web add github:tiantianlaolao/dsh-astock-research
-npx @deepseek-ai/dsh web
+npm install -g @deepseek-ai/dsh pnpm            # ① 一次性：dsh 本体 + pnpm（装插件需要）
+dsh plugin --profile web add dsh-astock-research # ② 一次性：从 npm 装本插件
+dsh web                                          # ③ 日常启动
 ```
 
-启动后浏览器打开 `http://127.0.0.1:3080`。以后每次使用只需最后一条 `npx @deepseek-ai/dsh web`。
+启动后按终端打印的地址打开浏览器（默认 `http://127.0.0.1:3080`）。以后每次使用只需最后一条 `dsh web`。
+
+已经装过 dsh 的，只需第 ② 步再重启 `dsh web`。
 
 ## 数据范围
 
