@@ -33,6 +33,8 @@ Once started, open the address printed in the terminal (default `http://127.0.0.
 
 Already have dsh installed? Just run step ② and restart `dsh web`.
 
+The commands are identical on macOS / Linux; if step ① fails with a permission error, prefix it with `sudo`.
+
 ## Things to ask once installed
 
 ```
