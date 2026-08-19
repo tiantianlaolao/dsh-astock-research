@@ -1,6 +1,6 @@
 {
   "name": "dsh-astock-research",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A股个股研究助手 dsh 插件：股票搜索 / 公告解读 / 财报解读 / 个股画像 / 信号科普，配合联网搜索与交易推演引流。",
   "type": "module",
   "main": "index.js",
