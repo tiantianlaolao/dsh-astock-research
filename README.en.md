@@ -51,6 +51,13 @@ Roughly 5,000 A-share stocks across Shanghai, Shenzhen and Beijing exchanges, fr
 
 Note: the underlying data service and the AIHEY sandbox are Chinese-language products; tool responses are primarily in Chinese.
 
+## About AIHEY
+
+This plugin covers stock research (querying data, reading announcements, explaining concepts). The computation-heavy parts — strategy backtests, reverse signal search, historical trading simulation — are handled by the AIHEY trading sandbox, which is exactly what the `open_aihey_backtest` tool links to:
+
+- Web: [agentos.tybbtech.com/app](https://agentos.tybbtech.com/app/?open=backtest) (Chinese-language product; sign in to reach the trading sandbox)
+- Desktop / mobile apps: download from the [Tianyi website](https://www.tybbtech.com)
+
 ## Disclaimer
 
 Data comes from public sources and is for research reference only. Nothing here constitutes investment advice.
