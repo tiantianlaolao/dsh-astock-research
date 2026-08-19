@@ -47,6 +47,16 @@ What is a "volume breakout" signal? Is it reliable?
 
 Announcement queries accept any historical date range (e.g. "Vanke's announcements around the 2015 crash"). For heavy computation — strategy backtests, reverse signal search, simulated trading — the assistant hands out a link to the AIHEY trading sandbox.
 
+## What it looks like
+
+Moutai's announcements from the last 90 days, annotated in plain language, with a disclaimer at the end:
+
+![Announcements explained](assets/demo-announcements.png)
+
+When explaining trading signals it states its own boundary — signal scanning and historical win rates belong to the trading sandbox:
+
+![Signal explanations and boundaries](assets/demo-signals.png)
+
 ## Data coverage
 
 Roughly 5,000 A-share stocks across Shanghai, Shenzhen and Beijing exchanges, from 2011 to the present. Hong Kong stocks, US stocks and unlisted companies are not covered (searches return empty; the model will clearly label its data source instead of impersonating database data).
