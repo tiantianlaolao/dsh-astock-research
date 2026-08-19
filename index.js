@@ -35,13 +35,29 @@ export function apply(ctx, config = {}) {
 
   async function api(path) {
     const sep = path.includes('?') ? '&' : '?'
-    const res = await fetch(`${BASE}${path}${sep}embedded=true`, {
-      headers: { 'Content-Type': 'application/json' },
-    })
+    let res
+    try {
+      res = await fetch(`${BASE}${path}${sep}embedded=true`, {
+        headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(20000),
+      })
+    } catch (e) {
+      const timedOut = e?.name === 'TimeoutError' || e?.name === 'AbortError'
+      throw new Error(timedOut
+        ? 'A股数据服务响应超时 (20秒)。稍等片刻重试即可; 若反复超时, 服务可能在维护。'
+        : 'A股数据服务暂时连不上。请先检查本机网络; 网络正常仍失败的话, 服务可能在维护, 稍后重试即可。')
+    }
     const text = await res.text()
     let data
     try { data = JSON.parse(text) } catch { data = { raw: text.slice(0, 400) } }
-    if (!res.ok) throw new Error(`查询服务 ${res.status}: ${(data && data.detail && (data.detail.message || data.detail)) || text.slice(0, 200)}`)
+    if (!res.ok) {
+      const detail = (data && data.detail && (data.detail.message || data.detail)) || text.slice(0, 200)
+      const err = new Error(res.status === 429
+        ? '查询太频繁, 触发了服务限流。歇几秒再问即可。'
+        : `查询服务返回 ${res.status}: ${detail}。可稍后重试或换个问法。`)
+      err.status = res.status
+      throw err
+    }
     return data
   }
 
@@ -132,7 +148,14 @@ export function apply(ctx, config = {}) {
     },
     async execute(args) {
       if (!CODE_RE.test(args.code)) throw new Error('code 须为6位数字, 先用 stock_search')
-      const d = await api(`/info/${args.code}/fin_card`)
+      let d
+      try {
+        d = await api(`/info/${args.code}/fin_card`)
+      } catch (e) {
+        // 404 = 该票暂无财报档案 (新股/数据未覆盖), 属正常情况, 让模型如实转告而非报工具错误
+        if (e?.status === 404) return { code: args.code, note: '暂无这只股票的财报档案 (可能是新股或数据尚未覆盖), 可改查公告或画像。' }
+        throw e
+      }
       return { code: d.code, name: d.name, industry: d.industry, latest: d.latest, trend: (d.trend || []).slice(-8) }
     },
   })
